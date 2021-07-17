@@ -1,0 +1,11 @@
+FROM fpm-base
+
+# Describes base image for creating deps and app rpms
+
+COPY ./custom_perl-0-1.x86_64.rpm /
+
+RUN yum install -y curl gcc make /custom_perl-0-1.x86_64.rpm
+
+ENV PATH /opt/custom_perl/bin:$PATH
+
+RUN curl -L https://cpanmin.us/ -o /opt/custom_perl/bin/cpanm && chmod a+x /opt/custom_perl/bin/cpanm

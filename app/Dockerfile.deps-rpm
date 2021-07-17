@@ -1,0 +1,8 @@
+FROM custom_perl-base
+
+# Dependencies of app + builder of its' rpm
+
+COPY cpanfile /tmp/cpanfile
+
+RUN mkdir -p /opt/app-deps/ && cd /tmp && /opt/custom_perl/bin/cpanm -L /opt/app-deps/ --installdeps .
+

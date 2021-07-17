@@ -1,0 +1,9 @@
+FROM custom_perl-base
+
+# Provides app rpm dependencies + builder
+
+COPY ./deps-0-1.x86_64.rpm /
+COPY app /tmp/app
+
+RUN mkdir -p /opt/app/bin
+RUN echo -e '#!/opt/custom_perl/bin/perl'"\nuse lib '/opt/app-deps/lib/perl5';\n" | cat - /tmp/app > /opt/app/bin/app && chmod a+x /opt/app/bin/app

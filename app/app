@@ -1,0 +1,16 @@
+#!/usr/bin/env perl
+
+use Mojolicious::Lite -signatures;
+use JSON::XS qw(encode_json);
+
+get '/' => sub ( $c ) {
+	my $time = time();
+	$c->render(text => "Hello, world ".encode_json({ time => { ts => $time, descr => ''.localtime( $time ) } }) );
+};
+
+get '/:foo' => sub ( $c ) {
+	my $foo = $c->param('foo');
+	$c->render(text => "Hello from $foo.");
+};
+
+app->start;

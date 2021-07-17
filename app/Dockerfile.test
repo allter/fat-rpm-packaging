@@ -1,0 +1,11 @@
+FROM centos:7
+
+# Allows to run application installed via rpms
+
+ADD ./custom_perl-0-1.x86_64.rpm /
+ADD ./deps-0-1.x86_64.rpm /
+ADD ./app-0-1.x86_64.rpm /
+
+RUN yum install -y /custom_perl-0-1.x86_64.rpm /deps-0-1.x86_64.rpm /app-0-1.x86_64.rpm
+
+CMD [ "/opt/app/bin/app" ]
